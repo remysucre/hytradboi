@@ -1,0 +1,70 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{WNW{\etalchar{+}}21}
+
+\bibitem[BNKZ21]{BalakrishnanNKZ21}
+Darshana Balakrishnan, Carl Nuessle, Oliver Kennedy, and Lukasz Ziarek,
+  \emph{Treetoaster: Towards an ivm-optimized compiler}, {SIGMOD} '21:
+  International Conference on Management of Data, Virtual Event, China, June
+  20-25, 2021 (Guoliang Li, Zhanhuai Li, Stratos Idreos, and Divesh Srivastava,
+  eds.), {ACM}, 2021, pp.~155--167.
+
+\bibitem[BS09]{BravenboerS09}
+Martin Bravenboer and Yannis Smaragdakis, \emph{Strictly declarative
+  specification of sophisticated points-to analyses}, Proceedings of the 24th
+  Annual {ACM} {SIGPLAN} Conference on Object-Oriented Programming, Systems,
+  Languages, and Applications, {OOPSLA} 2009, October 25-29, 2009, Orlando,
+  Florida, {USA} (Shail Arora and Gary~T. Leavens, eds.), {ACM}, 2009,
+  pp.~243--262.
+
+\bibitem[GBSS19]{GrechBSS19}
+Neville Grech, Lexi Brent, Bernhard Scholz, and Yannis Smaragdakis,
+  \emph{Gigahorse: thorough, declarative decompilation of smart contracts},
+  Proceedings of the 41st International Conference on Software Engineering,
+  {ICSE} 2019, Montreal, QC, Canada, May 25-31, 2019 (Joanne~M. Atlee, Tevfik
+  Bultan, and Jon Whittle, eds.), {IEEE} / {ACM}, 2019, pp.~1176--1186.
+
+\bibitem[LGC02]{LernerGC02}
+Sorin Lerner, David Grove, and Craig Chambers, \emph{Composing dataflow
+  analyses and transformations}, Conference Record of {POPL} 2002: The 29th
+  {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages, Portland,
+  OR, USA, January 16-18, 2002 (John Launchbury and John~C. Mitchell, eds.),
+  {ACM}, 2002, pp.~270--282.
+
+\bibitem[MYL16]{MadsenYL16}
+Magnus Madsen, Ming{-}Ho Yee, and Ondrej Lhot{\'{a}}k, \emph{From datalog to
+  flix: a declarative language for fixed points on lattices}, Proceedings of
+  the 37th {ACM} {SIGPLAN} Conference on Programming Language Design and
+  Implementation, {PLDI} 2016, Santa Barbara, CA, USA, June 13-17, 2016
+  (Chandra Krintz and Emery~D. Berger, eds.), {ACM}, 2016, pp.~194--208.
+
+\bibitem[NZSS19]{NappaZSS19}
+Patrick Nappa, David Zhao, Pavle Subotic, and Bernhard Scholz, \emph{Fast
+  parallel equivalence relations in a datalog compiler}, 28th International
+  Conference on Parallel Architectures and Compilation Techniques, {PACT} 2019,
+  Seattle, WA, USA, September 23-26, 2019, {IEEE}, 2019, pp.~82--96.
+
+\bibitem[Ste96]{Steensgaard96}
+Bjarne Steensgaard, \emph{Points-to analysis in almost linear time}, Conference
+  Record of POPL'96: The 23rd {ACM} {SIGPLAN-SIGACT} Symposium on Principles of
+  Programming Languages, Papers Presented at the Symposium, St. Petersburg
+  Beach, Florida, USA, January 21-24, 1996 (Hans{-}Juergen Boehm and Guy
+  L.~Steele Jr., eds.), {ACM} Press, 1996, pp.~32--41.
+
+\bibitem[WNW{\etalchar{+}}21]{WillseyNWFTP21}
+Max Willsey, Chandrakana Nandi, Yisu~Remy Wang, Oliver Flatt, Zachary Tatlock,
+  and Pavel Panchekha, \emph{egg: Fast and extensible equality saturation},
+  Proc. {ACM} Program. Lang. \textbf{5} (2021), no.~{POPL}, 1--29.
+
+\bibitem[ZWWT22]{ZhangWWT22}
+Yihong Zhang, Yisu~Remy Wang, Max Willsey, and Zachary Tatlock,
+  \emph{Relational e-matching}, Proc. {ACM} Program. Lang. \textbf{6} (2022),
+  no.~{POPL}, 1--22.
+
+\end{thebibliography}
