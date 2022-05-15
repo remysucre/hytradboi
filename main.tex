@@ -24,7 +24,7 @@
 
 \lstset{style=mystyle}
 
-\title{Souffl\'e is Baked Egg}
+\title{Baking Egg into Souffl\'e}
 \subtitle[]{Building compiler optimizations in Datalog}
 \author{\textbf{Remy Wang}, Yihong Zhang, Max Willsey, Philip Zucker, Zachary Tatlock }
 \date{April 2022 @ HYTRADBOI}
@@ -95,44 +95,81 @@
 
     In Souffl\'e:
     \begin{lstlisting}[language=Python]
-.type Exp = Add{x:Exp,y:Exp} | Var{n:symbol}
-.decl add(x:Exp,y:Exp,id:Exp)
-.decl var(v:symbol,id:Exp)
-add(x,y,id) :- id=$Add(x,y).
+.decl add(x:number,y:number,id:number)
+.decl var(v:symbol,id:number)
     \end{lstlisting}
+%     \begin{lstlisting}[language=Python]
+% .type Exp = Add{x:Exp,y:Exp} | Var{n:symbol}
+% .decl add(x:Exp,y:Exp,id:Exp)
+% .decl var(v:symbol,id:Exp)
+% add(x,y,id) :- id=$Add(x,y).
+%     \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Optimization in Datalog: Encoding Terms}
-    Group equivalent subexpressions into \textbf{equivalent classes}:
+    Group equivalent subexpressions into \textbf{equivalence classes}:
     \begin{figure}
         \includegraphics[height=0.4\textheight]{egraph4.pdf}
     \end{figure}
     \pause
     \begin{lstlisting}[language=Python]
-.decl eql(x:Exp,y:Exp) eqrel
-// keep only canonical Exp
+.decl eql(x:number,y:number) eqrel
+// keep only canonical term
 add(x,y,z) <= add(a,b,c) :-
-  eql(x,a), eql(y,b), eql(z,c),
-  a<=x, b<=y, c<=z.
+    eql(x,a), eql(y,b), eql(z,c),
+    a<=x, b<=y, c<=z.
     \end{lstlisting}
+%     \begin{lstlisting}[language=Python]
+% .decl eql(x:Exp,y:Exp) eqrel
+% // keep only canonical Exp
+% add(x,y,z) <= add(a,b,c) :-
+%   eql(x,a), eql(y,b), eql(z,c),
+%   a<=x, b<=y, c<=z.
+%     \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Optimization in Datalog: Encoding Rewrites}
-     A rewrite can add new terms and new equalities:
-
+     A rewrite can add new terms and new equalities~\footnote{A.k.a.\ tgds and egds.}:
      \begin{lstlisting}[language=Python]
 // comm-add
 eql(xy,yx), add(x,y,xy) :- 
-  add(y,x,yx), xy=$Add(x,y).
+    add(y,x,yx), xy=@hash('+',x,y).
     \end{lstlisting}
     \pause
     \begin{lstlisting}[language=Python]
 // assoc-add
 eql(xy_z,x_yz), add(xy,z,xy_z), add(x,y,xy) :-
-  add(y,z,yz), add(x,yz,x_yz),
-  xy = $Add(x,y), xy_z = $Add(xy,z).
+    add(y,z,yz), add(x,yz,x_yz),
+    xy=@hash('+',x,y), xy_z=@hash('+',xy,z).
+    \end{lstlisting}
+%      \begin{lstlisting}[language=Python]
+% // comm-add
+% eql(xy,yx), add(x,y,xy) :- 
+%   add(y,x,yx), xy=$Add(x,y).
+%     \end{lstlisting}
+%     \pause
+%     \begin{lstlisting}[language=Python]
+% // assoc-add
+% eql(xy_z,x_yz), add(xy,z,xy_z), add(x,y,xy) :-
+%   add(y,z,yz), add(x,yz,x_yz),
+%   xy = $Add(x,y), xy_z = $Add(xy,z).
+%     \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Optimization in Datalog: Picking the Best Term}
+     Analyzing cost is very natural:
+     \begin{lstlisting}[language=Python]
+.decl n_cost( node:number, c:number) // cost of node
+.decl c_cost(class:number, c:number) // cost of class
+
+n_cost(xy,a+b+1) :- add(x,y,xy), c_cost(x,a), c_cost(y,b).
+n_cost(v,1) :- var(v,_).
+
+c_cost(x,c) :- eq(x,y), n_cost(y,c).
+c_cost(x,a) <= c_cost(x, b) :- a >= b.
     \end{lstlisting}
 \end{frame}
 
